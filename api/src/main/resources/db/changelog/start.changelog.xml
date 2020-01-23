@@ -1,0 +1,71 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+
+    <changeSet id="1" author="gest1024@gmail.com">
+        <createTable tableName="quizes">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="quiz_name" type="varchar(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="boolean" defaultValueBoolean="true"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="gest1024@gmail.com">
+        <createTable tableName="questions">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="quiz_id" type="int">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="question_text" type="varchar(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="filter_number" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="gest1024@gmail.com (generated)" id="1579888407782-6">
+        <addUniqueConstraint columnNames="quiz_name" constraintName="UC_QUIZESQUIZ_NAME_COL" tableName="quizes"/>
+    </changeSet>
+    <changeSet author="gest1024@gmail.com (generated)" id="1579888407782-7">
+        <addForeignKeyConstraint baseColumnNames="quiz_id" baseTableName="questions" constraintName="FKhu7bacopenb4tq8fwpqq4mluy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="quizes" validate="true"/>
+    </changeSet>
+    <changeSet author="gest1024@gmail.com (generated)" id="1579888407782-1">
+        <dropDefaultValue columnDataType="boolean" columnName="active" tableName="quizes"/>
+    </changeSet>
+    <changeSet author="gest1024@gmail.com (generated)" id="1579888407782-2">
+        <dropNotNullConstraint columnDataType="timestamp" columnName="end_date" tableName="quizes"/>
+    </changeSet>
+    <changeSet author="gest1024@gmail.com (generated)" id="1579888407782-3">
+        <dropNotNullConstraint columnDataType="bigint" columnName="filter_number" tableName="questions"/>
+    </changeSet>
+    <changeSet author="gest1024@gmail.com (generated)" id="1579888407782-4">
+        <dropNotNullConstraint columnDataType="bigint" columnName="quiz_id" tableName="questions"/>
+    </changeSet>
+    <changeSet author="gest1024@gmail.com (generated)" id="1579888407782-5">
+        <dropNotNullConstraint columnDataType="timestamp" columnName="start_date" tableName="quizes"/>
+    </changeSet>
+    <changeSet author="gest1024@gmail.com (generated)" id="1579888523497-1">
+        <dropUniqueConstraint constraintName="UC_QUIZESQUIZ_NAME_COL" tableName="quizes"/>
+    </changeSet>
+    <changeSet author="gest1024@gmail.com (generated)" id="1579888523497-2">
+        <addUniqueConstraint columnNames="quiz_name" constraintName="UC_QUIZESQUIZ_NAME_COL" tableName="quizes"/>
+    </changeSet>
+
+</databaseChangeLog>
