@@ -9,7 +9,6 @@ import java.util.Set;
 public class Quiz {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -33,6 +32,14 @@ public class Quiz {
     public Quiz() {
     }
 
+    public Quiz(Long id, String quizName, Date startDate, Date endDate, Boolean active, Set<Question> questions) {
+        this.setId(id);
+        this.setQuizName(quizName);
+        this.setStartDate(startDate);
+        this.setEndDate(endDate);
+        this.setActive(active);
+        this.setQuestions(questions);
+    }
 
     public Long getId() {
         return id;
