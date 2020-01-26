@@ -1,9 +1,9 @@
 package com.testquiz.api.dao;
 
 import com.testquiz.api.model.Quiz;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface QuizDao {
 
@@ -13,6 +13,6 @@ public interface QuizDao {
 
     Quiz getQuiz(Long quizId);
 
-    List<Quiz> getAllQuizes(Pageable pageable);
+    Page<Quiz> getAllQuizes(String filter, Pageable pageable);
 
 }

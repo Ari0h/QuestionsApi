@@ -1,13 +1,13 @@
 package com.testquiz.api.service;
 
 import com.testquiz.api.DTOModel.QuizDTO;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface QuizService {
 
-    List<QuizDTO> getAllQuizes(Pageable pageable);
+    Page<QuizDTO> getAllQuizes(String filter, Pageable pageable);
 
     void createQuiz(QuizDTO quiz);
 

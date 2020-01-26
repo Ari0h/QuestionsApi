@@ -5,6 +5,8 @@ import com.testquiz.api.dao.QuizDao;
 import com.testquiz.api.model.Quiz;
 import com.testquiz.api.utils.ModelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,15 +21,16 @@ public class QuizServiceImpl implements QuizService {
     private QuizDao quizDao;
 
     @Override
-    public List<QuizDTO> getAllQuizes(Pageable pageable) {
-        List<Quiz> quizes = quizDao.getAllQuizes(pageable);
+    public Page<QuizDTO> getAllQuizes(String filter, Pageable pageable) {
+        Page<Quiz> quizes = quizDao.getAllQuizes(filter, pageable);
         List<QuizDTO> quizesDTO = new ArrayList<>();
         for(Quiz quiz: quizes){
             QuizDTO quizDTO = new QuizDTO();
             ModelConverter.converterDBOtoDTOQuiz(quizDTO, quiz);
             quizesDTO.add(quizDTO);
         }
-        return quizesDTO;
+        Page<QuizDTO> quizesPage = new PageImpl<>(quizesDTO);
+        return quizesPage;
     }
 
     @Override
