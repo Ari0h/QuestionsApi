@@ -1,19 +1,19 @@
 package com.testquiz.api.service;
 
-import com.testquiz.api.model.Quiz;
+import com.testquiz.api.DTOModel.QuizDTO;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface QuizService {
 
-    List<Quiz> getAllQuizes(Pageable pageable);
+    List<QuizDTO> getAllQuizes(Pageable pageable);
 
-    void createQuiz(Quiz quiz);
+    void createQuiz(QuizDTO quiz);
 
-    void editQuiz(Quiz quiz);
+    void editQuiz(QuizDTO quiz, Long id);
 
     void deleteQuiz(Long quizId);
 
-    Quiz getQuiz(Long quizId);
+    QuizDTO getQuiz(Long quizId);
 }

@@ -1,37 +1,18 @@
-package com.testquiz.api.model;
+package com.testquiz.api.DTOModel;
 
-import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-@Entity
-@Table(name = "quizes")
-public class Quiz {
+public class QuizDTO implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-
-    @Column(name = "quiz_name", nullable = false)
     private String quizName;
-
-    @Column(name = "start_date")
     private Date startDate;
-
-    @Column(name = "end_date")
     private Date endDate;
-
-    @Column(name = "active")
     private Boolean active;
-
-    @OneToMany(fetch = FetchType.EAGER,
-            mappedBy = "quiz",
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Question> questions;
-
-    public Quiz() {
-    }
+    private Set<QuestionDTO> questions;
 
     public Long getId() {
         return id;
@@ -73,12 +54,14 @@ public class Quiz {
         this.active = active;
     }
 
-    public Set<Question> getQuestions() {
+    public Set<QuestionDTO> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Set<Question> questions) {
+    public void setQuestions(Set<QuestionDTO> questions) {
         this.questions = questions;
     }
 
+    public QuizDTO() {
+    }
 }

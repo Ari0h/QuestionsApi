@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface QuizDao {
 
-    void insertQuiz(Quiz quiz);
-
     void editQuiz(Quiz quiz);
 
     void deleteQuiz(Long quizId);

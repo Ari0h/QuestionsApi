@@ -1,6 +1,6 @@
 package com.testquiz.api.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.testquiz.api.DTOModel.QuestionDTO;
 
 import javax.persistence.*;
 
@@ -13,16 +13,12 @@ public class Question {
     private Long id;
 
     @ManyToOne (fetch=FetchType.EAGER,
-            cascade=CascadeType.ALL)
-    @JsonProperty("quiz_id")
-    @JoinColumn (name="quiz_id")
+            cascade=CascadeType.MERGE)
     private Quiz quiz;
 
-    @JsonProperty("question_text")
     @Column(name = "question_text", nullable = false)
     private String questionText;
 
-    @JsonProperty("filter_number")
     @Column(name = "filter_number")
     private Long filterNumber;
 
@@ -61,10 +57,9 @@ public class Question {
     public Question() {
     }
 
-//    public Question(Quiz quiz, String questionText, Long filterNumber) {
-//        this.setQuiz(quiz);
-//        this.setQuestionText(questionText);
-//        this.setFilterNumber(filterNumber);
-//    }
-
+    public Question(QuestionDTO questionDTO) {
+        this.setId(questionDTO.getId());
+        this.setFilterNumber(questionDTO.getFilterNumber());
+        this.setQuestionText(questionDTO.getQuestionText());
+    }
 }
