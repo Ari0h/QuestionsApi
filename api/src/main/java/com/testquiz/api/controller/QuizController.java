@@ -1,14 +1,12 @@
 package com.testquiz.api.controller;
 
 import com.testquiz.api.DTOModel.QuizDTO;
+import com.testquiz.api.DTOModel.WebFilter;
 import com.testquiz.api.service.QuizService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @Api(value="Quiz controller")
@@ -18,10 +16,9 @@ public class QuizController {
     @Autowired
     private QuizService quizService;
     @ApiOperation(value = "Отображение списка всех элементов")
-    @RequestMapping(method = RequestMethod.GET, value ="/getall", produces = "application/json")
-    public Page<QuizDTO> getAllQuizes(@RequestParam(required = false, defaultValue = "") String filter,
-                                      @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        return quizService.getAllQuizes(filter, pageable);
+    @RequestMapping(method = RequestMethod.POST, value ="/getall", produces = "application/json")
+    public Page<QuizDTO> getAllQuizes(@RequestBody WebFilter webFilter) {
+        return quizService.getAllQuizes(webFilter);
     }
 
     @ApiOperation(value = "Создание нового опроса")

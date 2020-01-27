@@ -1,6 +1,7 @@
 package com.testquiz.api.service;
 
 import com.testquiz.api.DTOModel.QuizDTO;
+import com.testquiz.api.DTOModel.WebFilter;
 import com.testquiz.api.dao.QuizDao;
 import com.testquiz.api.model.Quiz;
 import com.testquiz.api.utils.ModelConverter;
@@ -21,8 +22,8 @@ public class QuizServiceImpl implements QuizService {
     private QuizDao quizDao;
 
     @Override
-    public Page<QuizDTO> getAllQuizes(String filter, Pageable pageable) {
-        Page<Quiz> quizes = quizDao.getAllQuizes(filter, pageable);
+    public Page<QuizDTO> getAllQuizes(WebFilter webFilter) {
+        Page<Quiz> quizes = quizDao.getAllQuizes(webFilter);
         List<QuizDTO> quizesDTO = new ArrayList<>();
         for(Quiz quiz: quizes){
             QuizDTO quizDTO = new QuizDTO();

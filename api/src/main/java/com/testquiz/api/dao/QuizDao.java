@@ -1,8 +1,8 @@
 package com.testquiz.api.dao;
 
+import com.testquiz.api.DTOModel.WebFilter;
 import com.testquiz.api.model.Quiz;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 
 public interface QuizDao {
@@ -13,6 +13,6 @@ public interface QuizDao {
 
     Quiz getQuiz(Long quizId);
 
-    Page<Quiz> getAllQuizes(String filter, Pageable pageable);
+    Page<Quiz> getAllQuizes(WebFilter webFilter);
 
 }
