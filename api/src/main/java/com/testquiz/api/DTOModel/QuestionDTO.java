@@ -2,7 +2,6 @@ package com.testquiz.api.DTOModel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.JoinColumn;
 import java.io.Serializable;
 
 public class QuestionDTO implements Serializable {

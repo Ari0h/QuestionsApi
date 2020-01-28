@@ -1,5 +1,6 @@
 package com.testquiz.api.model;
 
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -28,6 +29,7 @@ public class Quiz {
     @OneToMany(fetch = FetchType.EAGER,
             mappedBy = "quiz",
             cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("filterNumber ASC")
     private Set<Question> questions;
 
     public Quiz() {

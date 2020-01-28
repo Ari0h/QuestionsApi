@@ -27,7 +27,7 @@ public class QuizServiceImpl implements QuizService {
         List<QuizDTO> quizesDTO = new ArrayList<>();
         for(Quiz quiz: quizes){
             QuizDTO quizDTO = new QuizDTO();
-            ModelConverter.converterDBOtoDTOQuiz(quizDTO, quiz);
+            ModelConverter.converterDBOtoDTOQuiz(quizDTO, quiz, webFilter);
             quizesDTO.add(quizDTO);
         }
         Page<QuizDTO> quizesPage = new PageImpl<>(quizesDTO);

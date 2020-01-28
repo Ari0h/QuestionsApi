@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service("quizDao")
@@ -46,14 +47,14 @@ public class QuizDaoImpl implements QuizDao {
 
     @Override
     public Page<Quiz> getAllQuizes(WebFilter webFilter) {
-        Filter filter = FilterUtils.parseFilter(webFilter.getSort());
+        List<Filter> filterList = FilterUtils.parseFilter(webFilter.getSort());
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Quiz> cq = builder.createQuery(Quiz.class);
         Root<Quiz> root = cq.from(Quiz.class);
         Join<Quiz, Question> question = root.join("questions");
         ArrayList<Predicate> predicates = prepareCriteria(webFilter, builder, root, question);
         cq.select(root).where(predicates.toArray(new Predicate[predicates.size()]));
-        addOrderByToCriteria(cq, builder, root, question, filter);
+        addOrderByToCriteria(cq, builder, root, question, filterList);
         TypedQuery<Quiz> query = entityManager.createQuery(cq);
         query.setFirstResult(webFilter.getFirstResult());
         query.setMaxResults(webFilter.getSize());
@@ -61,22 +62,16 @@ public class QuizDaoImpl implements QuizDao {
         return new PageImpl<>(resultList);
     }
 
-    private void addOrderByToCriteria(CriteriaQuery<Quiz> cq, CriteriaBuilder builder, Root<Quiz> root,Join<Quiz, Question> question, Filter filter){
-        if (filter.getFilterName().equals("filterNumber")){
-            switch (filter.getOrderBy()){
-                case "asc":
-                    cq.orderBy(builder.asc(question.get(filter.getFilterName())));
-                    break;
-                case "desc":
-                    cq.orderBy(builder.desc(question.get(filter.getFilterName())));
-            }
-        } else {
-            switch (filter.getOrderBy()){
-                case "asc":
-                    cq.orderBy(builder.asc(root.get(filter.getFilterName())));
-                    break;
-                case "desc":
-                    cq.orderBy(builder.desc(root.get(filter.getFilterName())));
+    private void addOrderByToCriteria(CriteriaQuery<Quiz> cq, CriteriaBuilder builder, Root<Quiz> root, Join<Quiz, Question> question, List<Filter> filterList) {
+        for (Filter filter : filterList) {
+            if (!filter.getFilterName().equals("filterNumber")) {
+                switch (filter.getOrderBy()) {
+                    case "asc":
+                        cq.orderBy(builder.asc(root.get(filter.getFilterName())));
+                        break;
+                    case "desc":
+                        cq.orderBy(builder.desc(root.get(filter.getFilterName())));
+                }
             }
         }
     }
