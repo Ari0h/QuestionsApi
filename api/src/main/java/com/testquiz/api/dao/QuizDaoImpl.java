@@ -5,7 +5,6 @@ import com.testquiz.api.DTOModel.WebFilter;
 import com.testquiz.api.model.Question;
 import com.testquiz.api.model.Quiz;
 import com.testquiz.api.utils.FilterUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Repository;
@@ -16,7 +15,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 @Service("quizDao")
@@ -25,9 +23,6 @@ public class QuizDaoImpl implements QuizDao {
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    @Autowired
-    private QuizRepo quizRepo;
 
     @Override
     public void editQuiz(Quiz quiz) {

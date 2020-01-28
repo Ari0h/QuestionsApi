@@ -1,7 +1,6 @@
 package com.testquiz.api.model;
 
 import com.testquiz.api.DTOModel.QuestionDTO;
-import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
 

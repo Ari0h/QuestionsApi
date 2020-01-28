@@ -1,6 +1,5 @@
 package com.testquiz.api.utils;
 
-import com.testquiz.api.DTOModel.Filter;
 import com.testquiz.api.DTOModel.QuestionDTO;
 import com.testquiz.api.DTOModel.QuizDTO;
 import com.testquiz.api.DTOModel.WebFilter;
