@@ -44,7 +44,7 @@ public class ModelConverter {
             converterDBOtoDTOQuestions(questionDTO, question);
             questionsDTO.add(questionDTO);
         }
-        if (webFilter!= null && webFilter.getSort().contains("-filterNumber")){
+        if (webFilter.getSort()!= null && webFilter.getSort().contains("-filterNumber")){
             quizDTO.setQuestions( questionsDTO.descendingSet());
         } else {
             quizDTO.setQuestions( questionsDTO);

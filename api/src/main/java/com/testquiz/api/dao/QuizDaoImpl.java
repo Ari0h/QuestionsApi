@@ -46,9 +46,13 @@ public class QuizDaoImpl implements QuizDao {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Quiz> cq = builder.createQuery(Quiz.class);
         Root<Quiz> root = cq.from(Quiz.class);
-        Join<Quiz, Question> question = root.join("questions");
+        Join<Quiz, Question> question = root.join("questions", JoinType.LEFT);
         ArrayList<Predicate> predicates = prepareCriteria(webFilter, builder, root, question);
-        cq.select(root).where(predicates.toArray(new Predicate[predicates.size()]));
+        if(!predicates.isEmpty()){
+            cq.select(root).where(predicates.toArray(new Predicate[predicates.size()]));
+        } else {
+            cq.select(root).distinct(true);
+        }
         addOrderByToCriteria(cq, builder, root, question, filterList);
         TypedQuery<Quiz> query = entityManager.createQuery(cq);
         query.setFirstResult(webFilter.getFirstResult());

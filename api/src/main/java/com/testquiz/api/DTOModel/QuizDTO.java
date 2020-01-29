@@ -1,17 +1,30 @@
 package com.testquiz.api.DTOModel;
 
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 public class QuizDTO implements Serializable {
 
+    @ApiModelProperty(notes = "Идентификатор опроса")
     private Long id;
+
+    @ApiModelProperty(notes = "Название опроса")
     private String quizName;
+
+    @ApiModelProperty(notes = "Дата начала опроса")
     private Date startDate;
+
+    @ApiModelProperty(notes = "Дата окончания опроса")
     private Date endDate;
+
+    @ApiModelProperty(notes = "Признак активности опроса")
     private Boolean active;
+
+    @ApiModelProperty(notes = "Список вопросов, относящихся к вопросу")
     private Set<QuestionDTO> questions;
 
     public Long getId() {

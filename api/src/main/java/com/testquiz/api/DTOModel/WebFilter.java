@@ -1,31 +1,39 @@
 package com.testquiz.api.DTOModel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
 
 public class WebFilter implements Serializable {
 
+    @ApiModelProperty(notes = "Идентификатор опроса")
     private Long id;
 
+    @ApiModelProperty(notes = "Название опроса")
     private String quizName;
 
+    @ApiModelProperty(notes = "Дата начала опроса")
     private Date startDate;
 
+    @ApiModelProperty(notes = "Дата окончания опроса")
     private Date endDate;
 
+    @ApiModelProperty(notes = "Признак активности опроса")
     private Boolean active;
 
+    @ApiModelProperty(notes = "Текст вопроса")
     @JsonProperty("question_text")
     private String questionText;
 
-    private String orderBy;
-
+    @ApiModelProperty(notes = "Номер страницы")
     private Integer page;
 
+    @ApiModelProperty(notes = "Количество элементов на странице")
     private Integer size;
 
+    @ApiModelProperty(notes = "Поле сортировки. Поля перечисляются через ',' Порядок сортировки указывается '+' или '-' перед наименованием поля сортировки")
     private String sort;
 
     public Long getId() {
@@ -76,16 +84,8 @@ public class WebFilter implements Serializable {
         this.questionText = questionText;
     }
 
-    public String getOrderBy() {
-        return orderBy;
-    }
-
     public Integer getFirstResult(){
         return this.page*this.size;
-    }
-
-    public void setOrderBy(String orderBy) {
-        this.orderBy = orderBy;
     }
 
     public Integer getPage() {
